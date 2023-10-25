@@ -1,8 +1,10 @@
 import React from "react";
+import { Count, DateCom } from "@/components/use_state/01_base";
 const App: React.FC = () => {
   return (
     <>
-      <h1>这是App函数组件</h1>
+      <Count></Count>
+      <DateCom></DateCom>
     </>
   );
 };
