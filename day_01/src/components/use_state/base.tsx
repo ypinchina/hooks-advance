@@ -36,3 +36,30 @@ export const DateCom: React.FC = () => {
     </>
   );
 };
+export const UserInfo: React.FC = () => {
+  const [userInfo, setUserInfo] = useState({
+    name: "yip",
+    age: 20,
+    gender: "male",
+  });
+  const changeUserInfo = () => {
+    userInfo.name = "carrick";
+    userInfo.age = 30;
+    userInfo.gender = "female";
+    // setUserInfo(userInfo); // 错误的 ， 对象引用没有发生改变，react不会刷新组件
+
+    // 正确写法
+    // setUserInfo({...userInfo})
+    // 或者
+    setUserInfo(Object.assign({}, userInfo));
+  };
+  return (
+    <>
+      <h1>个人信息</h1>
+      <p>name: {userInfo.name}</p>
+      <p>age: {userInfo.age}</p>
+      <p>gender: {userInfo.gender}</p>
+      <button onClick={changeUserInfo}>修改个人信息</button>
+    </>
+  );
+};

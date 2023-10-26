@@ -74,3 +74,47 @@ setCount 是异步执行的，会先执行 console.log
 ```
 
 解释：为了解决上述的问题，我们可以使用函数的方式给状态赋新值。当函数执行时才通过函数的形参，拿到当前的状态值，并基于它返回新的状态值
+
+### useState 修改对象的属性的问题
+
+```
+  const changeUserInfo = () => {
+    userInfo.name = "carrick";
+    userInfo.age = 30;
+    userInfo.gender = "female";
+    // setUserInfo(userInfo); // 错误的 ， 对象引用没有发生改变，react不会刷新组件
+
+    // 正确写法
+    // setUserInfo({...userInfo})
+    // 或者
+    setUserInfo(Object.assign({}, userInfo));
+  };
+```
+
+### 使用 setState 模拟组件的强制刷新
+
+在函数组件中，我们可以通过 useState 来模拟 forceUpdate 的强制刷新操作。因为只要 useState 的状态发生了变化，就会触发函数组件的重新渲染，从而达到强制刷新的目的
+代码如下
+
+```
+const [, forceUpdate] = useState({})
+
+  // 每次调用 onRefresh 函数，都会给 forceUpdate 传递一个新对象
+  // 从而触发组件的重新渲染
+  const onRefresh = () => forceUpdate({})
+
+  return (
+    <>
+      <button onClick={onRefresh}>点击强制刷新 --- {Date.now()}</button>
+    </>
+  )
+```
+
+## useRef
+
+useRef 函数返回一个可变的 ref 对象，该对象只有一个 current 属性。可以在调用 useRef 函数时为其指定初始值。并且这个返回的 ref 对象在组件的整个生命周期内保持不变。
+
+- useRef 函数用来解决以下两个问题：
+
+1. 获取 DOM 元素或子组件的实例对象；
+2. 存储渲染周期之间共享的数据；
