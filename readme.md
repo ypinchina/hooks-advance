@@ -40,3 +40,37 @@ const [value, setValue] = useState(() => 初始值)
 ```
 
 setCount 是异步执行的，会先执行 console.log
+
+### 解决值更新不及时的 Bug
+
+当连续多次以相同的操作更新状态值时，React 内部会对传递过来的新值进行比较，如果值相同，则会屏蔽后续的更新行为，从而防止组件频繁渲染的问题。这虽然提高了性能，但也带来了一个使用误区
+
+```
+  const [count, setCount] = useState(() => 0)
+
+  const add = () => {
+    // 1. 希望让 count 值从 0 自增到 1
+    setCount(count + 1)
+    // 2. 希望让 count 值从 1 自增到 2
+    setCount(count + 1)
+  }
+```
+
+如以上代码页面上显示当前 count 的值是 1 ，而不是 2，**why**??
+
+因为 setCount 是**异步**地更新状态值的，所以前后两次调用 setCount 传递进去的新值都是 1。React 内部如果遇到两次相同的状态，则会**默认阻止组件再次更新**。
+
+解决方法如下
+
+```
+  const [count, setCount] = useState(() => 0)
+
+  const add = () => {
+    // 1. 希望让 count 值从 0 自增到 1
+    setCount((prev) => prev + 1)
+    // 2. 希望让 count 值从 1 自增到 2
+    setCount((prev) => prev + 1)
+  }
+```
+
+解释：为了解决上述的问题，我们可以使用函数的方式给状态赋新值。当函数执行时才通过函数的形参，拿到当前的状态值，并基于它返回新的状态值

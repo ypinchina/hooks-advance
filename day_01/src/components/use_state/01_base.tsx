@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 export const Count: React.FC = () => {
   console.log("函数执行了");
   const [count, setCount] = useState(0);
   const add = () => {
-    setCount(count + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
   };
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
   return (
     <>
       <h1>Count的值是: {count}</h1>
