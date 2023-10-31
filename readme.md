@@ -152,4 +152,23 @@ ref 的作用是获取实例，但由于函数组件不存在实例，因此无�
 
 React.forwardRef 会创建一个 React 组件，这个组件能够将其接收到的 ref 属性转发到自己的组件树。
 
-组件不会将它们的 DOM 节点暴露给父组件。举例来说，如果你想要 MyInput 的父组件 能访问到 <input> DOM 节点，你必须选择使用 forwardRef:。
+组件不会将它们的 DOM 节点暴露给父组件。举例来说，如果你想要 MyInput 的父组件 能访问到 <input> DOM 节点，你必须选择使用 forwardRef。
+
+
+
+记录基本使用说明：   
+
+forwardRef返回一个DOM函数组件，方法的参数是一个函数，函数用于创建DOM函数组件，方法有两个参数，第一个参数 ：props（用于接收父组件传递到子组件的props）；
+第二个参数： ref(即父组件传递过来的ref值)  
+
+
+2. useImperativeHandle  
+
+直接使用 ref 获取 DOM 实例，会全面暴露 DOM 实例上的 API，从而导致外部使用 ref 时有更大的自由度。在实际开发中，我们应该严格控制 ref 的暴露颗粒度，控制它能调用的方法，只向外暴露主要的功能函数，其它功能函数不暴露。  
+
+React 官方提供 useImperativeHandle 的目的，就是让你在使用 ref 时可以自定义暴露给外部组件哪些功能函数或属性。  语法结构如下：  
+
+```
+useImperativeHandle(通过forwardRef接收到的父组件的ref对象, () => 自定义ref对象, [依赖项数组])
+```
+其中，第三个参数“依赖项数组”是可选的。  
