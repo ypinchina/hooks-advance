@@ -151,3 +151,5 @@ useEffect({
 ref 的作用是获取实例，但由于函数组件不存在实例，因此无法通过 ref 获取函数组件的实例引用。而 React.forwardRef 就是用来解决这个问题的。
 
 React.forwardRef 会创建一个 React 组件，这个组件能够将其接收到的 ref 属性转发到自己的组件树。
+
+组件不会将它们的 DOM 节点暴露给父组件。举例来说，如果你想要 MyInput 的父组件 能访问到 <input> DOM 节点，你必须选择使用 forwardRef:。
