@@ -1,9 +1,9 @@
 import React from "react";
-import { Effect } from "./components/use_effect/base";
+import { TextColorCom } from "./components/use_effect/base";
 const App: React.FC = () => {
   return (
     <>
-      <Effect></Effect>
+      <TextColorCom></TextColorCom>
     </>
   );
 };
