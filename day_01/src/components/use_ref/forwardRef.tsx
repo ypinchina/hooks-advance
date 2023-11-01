@@ -5,6 +5,7 @@ export const Child = forwardRef((_, ref) => {
       setCount(prev => prev += step)
     }
     useImperativeHandle(ref, () => {
+      console.log('渲染了关联页面')
       return {
         count,
         reset: () => setCount(0)

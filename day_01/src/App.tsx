@@ -1,9 +1,9 @@
 import React from "react";
-import { Father } from "./components/use_ref/forwardRef";
+import { Effect } from "./components/use_effect/base";
 const App: React.FC = () => {
   return (
     <>
-      <Father></Father>
+      <Effect></Effect>
     </>
   );
 };
