@@ -1,9 +1,9 @@
 import React from "react";
-import { TextColorCom } from "./components/use_effect/base";
+import { TestMouseInfo } from "./components/use_effect/mouseEvent";
 const App: React.FC = () => {
   return (
     <>
-      <TextColorCom></TextColorCom>
+      <TestMouseInfo></TestMouseInfo>
     </>
   );
 };
