@@ -1,9 +1,9 @@
 import React from "react";
-import { TestMouseInfo } from "./components/use_effect/mouseEvent";
+import { TestCountdown } from "./components/use_effect/countdown";
 const App: React.FC = () => {
   return (
     <>
-      <TestMouseInfo></TestMouseInfo>
+      <TestCountdown></TestCountdown>
     </>
   );
 };
