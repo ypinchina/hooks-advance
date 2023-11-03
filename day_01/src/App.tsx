@@ -1,9 +1,9 @@
 import React from "react";
-import { TestCountdown } from "./components/use_effect/countdown";
+import { LayoutEffect } from "./components/use_effect/layoutEffect";
 const App: React.FC = () => {
   return (
     <>
-      <TestCountdown></TestCountdown>
+      <LayoutEffect></LayoutEffect>
     </>
   );
 };
