@@ -253,5 +253,23 @@ useEffect(() => {
 #### useLayoutEffect与 useEffect的区别
 
 
-执行时机不同， 前者是在浏览器重新绘制屏幕之前执行，后者在浏览器重新绘制屏幕之后执行
-执行过程不同，前者同步，阻塞浏览器的重新绘制，后者异步，不阻塞浏览器的绘制
+执行时机不同， 前者是在浏览器重新绘制屏幕之前执行，后者在浏览器重新绘制屏幕之后执行  
+执行过程不同，前者同步，阻塞浏览器的重新绘制，后者异步，不阻塞浏览器的绘制  
+
+
+### useReducer
+
+当状态更新逻辑较复杂时可以考虑使用 useReducer。useReducer 可以同时更新多个状态，而且能把对状态的修改从组件中独立出来。
+
+相比于 useState，useReducer 可以更好的描述“如何更新状态”。例如：组件负责发出行为，useReducer 负责更新状态。
+
+好处是：让代码逻辑更清晰，代码行为更易预测。
+
+语法：
+```
+const [state, dispatch] = useReducer(reducer, initState, initAction?)
+```
+1. reducer 是一个函数，类似于 (prevState, action) => newState。形参 prevState 表示旧状态，形参 action 表示本次的行为，返回值 newState 表示处理完毕后的新状态。  
+2. initState 表示初始状态，也就是默认值。  
+3. initAction 是进行状态初始化时候的处理函数，它是可选的，如果提供了 initAction 函数，则会把 initState 传递给 initAction 函数进行处理，initAction 的返回值会被当做初始状态。  
+4. 返回值 state 是状态值。dispatch 是更新 state 的方法，让他接收 action 作为参数，useReducer 只需要调用 dispatch(action) 方法传入的 action 即可更新 state。  
