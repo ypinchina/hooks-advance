@@ -273,3 +273,8 @@ const [state, dispatch] = useReducer(reducer, initState, initAction?)
 2. initState 表示初始状态，也就是默认值。  
 3. initAction 是进行状态初始化时候的处理函数，它是可选的，如果提供了 initAction 函数，则会把 initState 传递给 initAction 函数进行处理，initAction 的返回值会被当做初始状态。  
 4. 返回值 state 是状态值。dispatch 是更新 state 的方法，让他接收 action 作为参数，useReducer 只需要调用 dispatch(action) 方法传入的 action 即可更新 state。  
+
+
+* 不能直接修改 useReducer返回的state的数据，因为不是响应式的，数据变了，页面不会改变
+
+以上问题的解决方法是 需要触发第一个函数 reduce，来修改state才会有响应式更新页面(即第4点)
