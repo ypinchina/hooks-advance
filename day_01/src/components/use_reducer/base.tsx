@@ -24,7 +24,7 @@ export const Father: React.FC = () => {
         oldState.age -= action.payload;
         break;
       case "RESET":
-        return { ...initState, age: Math.round(Math.abs(initState.age)) || 18 };
+        return actionState(initState)
       default:
         return oldState;
     }

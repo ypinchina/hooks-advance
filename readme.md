@@ -257,7 +257,7 @@ useEffect(() => {
 执行过程不同，前者同步，阻塞浏览器的重新绘制，后者异步，不阻塞浏览器的绘制  
 
 
-### useReducer
+## useReducer
 
 当状态更新逻辑较复杂时可以考虑使用 useReducer。useReducer 可以同时更新多个状态，而且能把对状态的修改从组件中独立出来。
 
@@ -280,7 +280,7 @@ const [state, dispatch] = useReducer(reducer, initState, initAction?)
 以上问题的解决方法是 需要触发第一个函数 dispatch,往dispatch中传递修改的参数调用，然后通过reducer回调函数，来修改state才会有响应式更新页面(即第4点)
 
 
-#### 使用 Immer 编写更简洁的 reducer 更新逻辑
+### 使用 Immer 编写更简洁的 reducer 更新逻辑
 
 immer简化了修改reducer的state的代码，减轻程序员的心智负担
 
@@ -292,3 +292,10 @@ npm install immer use-immer -S
 ```
 import { useImmerReducer } from 'use-immer'  
 ```
+
+## useContext  
+在 react 函数式组件中，如果组件的嵌套层级很深，当父组件想把数据共享给最深层的子组件时，传统的办法是使用 props，一层一层把数据向下传递。  
+
+使用 props 层层传递数据的维护性太差了，我们可以使用 React.createContext() + useContext() 轻松实现多层组件的数据传递。  
+
+![avatar](https://www.escook.cn/wp-content/uploads/2023/09/image-20230920202508702.png)
