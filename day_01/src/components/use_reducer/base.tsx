@@ -1,4 +1,6 @@
-import React, { useReducer } from "react";
+import React from "react";
+import { useImmerReducer } from "use-immer";
+
 type useType = typeof initState;
 const initState = { name: "yip", age: -4.5 };
 type actionType =
@@ -7,24 +9,27 @@ type actionType =
   | { type: "DECREMENT"; payload: number }
   | { type: "RESET" };
 export const Father: React.FC = () => {
-  const actionState = (initState: useType) => {
-    return { ...initState, age: Math.round(Math.abs(initState.age)) || 18 };
+  const actionState = (prevState: useType) => {
+    return { ...prevState, age: Math.round(Math.abs(prevState.age)) || 18 };
   };
   const reducer = (oldState: useType, action: actionType) => {
     switch (action.type) {
       case "name":
-        return { ...oldState, name: action.payload };
+        oldState.name = action.payload;
+        break;
       case "INCREMENT":
-        return { ...oldState, age: oldState.age + action.payload };
+        oldState.age += action.payload;
+        break;
       case "DECREMENT":
-        return { ...oldState, age: oldState.age - action.payload };
+        oldState.age -= action.payload;
+        break;
       case "RESET":
         return { ...initState, age: Math.round(Math.abs(initState.age)) || 18 };
       default:
         return oldState;
     }
   };
-  const [state, dispatch] = useReducer(reducer, initState, actionState);
+  const [state, dispatch] = useImmerReducer(reducer, initState, actionState);
   const changeUseName = () => {
     dispatch({ type: "name", payload: "易 鵬" });
   };
