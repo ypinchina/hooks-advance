@@ -277,4 +277,4 @@ const [state, dispatch] = useReducer(reducer, initState, initAction?)
 
 * 不能直接修改 useReducer返回的state的数据，因为不是响应式的，数据变了，页面不会改变
 
-以上问题的解决方法是 需要触发第一个函数 reduce，来修改state才会有响应式更新页面(即第4点)
+以上问题的解决方法是 需要触发第一个函数 dispatch,往dispatch中传递修改的参数调用，然后通过reducer回调函数，来修改state才会有响应式更新页面(即第4点)
