@@ -299,3 +299,10 @@ import { useImmerReducer } from 'use-immer'
 使用 props 层层传递数据的维护性太差了，我们可以使用 React.createContext() + useContext() 轻松实现多层组件的数据传递。  
 
 ![avatar](https://www.escook.cn/wp-content/uploads/2023/09/image-20230920202508702.png)
+
+### useContext 的语法格式  
+主要的使用步骤如下：  
+
+1. 在全局创建 Context 对象  
+2. 在父组件中使用 Context.Provider 提供数据  
+3. 在子组件中使用 useContext 使用数据  
