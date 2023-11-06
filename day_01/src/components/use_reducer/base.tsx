@@ -1,9 +1,12 @@
 import React, { useReducer } from "react";
 type useType = typeof initState;
-const initState = { name: "yip", age: 0 };
+const initState = { name: "yip", age: -4.5 };
+type actionType =
+  | { type: "name"; payload: string }
+  | { type: "INCREMENT"; payload: number }
+  | { type: "DECREMENT"; payload: number }
+  | { type: "RESET" };
 export const Father: React.FC = () => {
-  type actionType = { type: "name"; payload: string };
-
   const actionState = (initState: useType) => {
     return { ...initState, age: Math.round(Math.abs(initState.age)) || 18 };
   };
@@ -11,6 +14,12 @@ export const Father: React.FC = () => {
     switch (action.type) {
       case "name":
         return { ...oldState, name: action.payload };
+      case "INCREMENT":
+        return { ...oldState, age: oldState.age + action.payload };
+      case "DECREMENT":
+        return { ...oldState, age: oldState.age - action.payload };
+      case "RESET":
+        return { ...initState, age: Math.round(Math.abs(initState.age)) || 18 };
       default:
         return oldState;
     }
@@ -24,24 +33,53 @@ export const Father: React.FC = () => {
       <button onClick={changeUseName}>修改用户名</button>
       <h3>{JSON.stringify(state)}</h3>
       <div className="father">
-        <Son1 {...state}></Son1>
-        <Son2 {...state}></Son2>
+        <Son1 {...state} dispatch={dispatch}></Son1>
+        <Son2 {...state} dispatch={dispatch}></Son2>
       </div>
     </>
   );
 };
 
-const Son1: React.FC<useType> = (props) => {
+const Son1: React.FC<useType & { dispatch: React.Dispatch<actionType> }> = (
+  props
+) => {
+  const { dispatch, ...user } = props;
+  const add = () => {
+    dispatch({ type: "INCREMENT", payload: 1 });
+  };
   return (
     <div className="son1">
-      <p>{JSON.stringify(props)}</p>
+      <p>{JSON.stringify(user)}</p>
+      <button onClick={add}>add age</button>
     </div>
   );
 };
-const Son2: React.FC<useType> = (props) => {
+const Son2: React.FC<useType & { dispatch: React.Dispatch<actionType> }> = (
+  props
+) => {
+  const { dispatch, ...user } = props;
+  const reduce = () => {
+    dispatch({ type: "DECREMENT", payload: 1 });
+  };
   return (
     <div className="son2">
-      <p>{JSON.stringify(props)}</p>
+      <p>{JSON.stringify(user)}</p>
+      <button onClick={reduce}>reduce age</button>
+      <hr></hr>
+      <Grandson dispatch={dispatch}></Grandson>
     </div>
+  );
+};
+const Grandson: React.FC<{ dispatch: React.Dispatch<actionType> }> = (
+  props
+) => {
+  const resetState = () => {
+    props.dispatch({ type: "RESET" });
+  };
+  return (
+    <>
+      <h3>Grandson 组件</h3>
+      <button onClick={resetState}>reset</button>
+    </>
   );
 };
