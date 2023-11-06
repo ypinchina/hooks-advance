@@ -1,9 +1,9 @@
 import React from "react";
-import { Father } from "./components/use_reducer/base";
+import { LevelA } from "./components/use_context/base";
 const App: React.FC = () => {
   return (
     <>
-      <Father></Father>
+      <LevelA></LevelA>
     </>
   );
 };
