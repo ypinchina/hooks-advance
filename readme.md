@@ -314,3 +314,4 @@ import { useImmerReducer } from 'use-immer'
 
 为了保证父组件中代码的单一性，也为了提高 Provider 的通用性，我们可以考虑把 Context.Provider 封装到独立的 Wrapper 函数式组件中，
 
+* 好处是将业务和数据进行了分离
