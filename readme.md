@@ -306,3 +306,11 @@ import { useImmerReducer } from 'use-immer'
 1. 在全局创建 Context 对象  
 2. 在父组件中使用 Context.Provider 提供数据  
 3. 在子组件中使用 useContext 使用数据  
+
+
+### ☆☆☆以非侵入的方式使用 Context  
+
+在常规的代码中侵入了 <AppContext.Provider> 这样的代码结构。
+
+为了保证父组件中代码的单一性，也为了提高 Provider 的通用性，我们可以考虑把 Context.Provider 封装到独立的 Wrapper 函数式组件中，
+
