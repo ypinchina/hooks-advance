@@ -1,9 +1,9 @@
 import React from "react";
-import { Father } from "./components/use_memo/useMemo";
+import { Search } from "./components/use_callback/base";
 const App: React.FC = () => {
   return (
     <>
-      <Father></Father>
+      <Search></Search>
     </>
   );
 };

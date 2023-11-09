@@ -356,3 +356,18 @@ const memoValue = useMemo(() => {
 * 不传数组，每次更新都会重新计算
 * 空数组，只会计算一次
 * 依赖对应的值，对应的值发生变化时会重新执行 cb
+
+
+### useCallback
+
+之前我们所学的 useMemo 能够达到缓存某个**变量值**的效果，而当前要学习的 useCallback 用来对组件内的**函数**进行缓存，它返回的是缓存的**函数**。它的语法格式如下：
+```
+const memoCallback = useCallback(cb, array)
+```  
+useCallback 会返回一个 memorized 回调函数供组件使用，从而防止组件每次 rerender 时反复创建相同的函数，能够节省内存开销，提高性能。其中：  
+
+1. cb 是一个函数，用于处理业务逻辑，这个 cb 就是需要被缓存的函数  
+2. array 是依赖项列表，当 array 中的依赖项变化时才会重新执行 useCallback。  
+* 如果省略 array，则每次更新都会重新计算  
+* 如果 array 为空数组，则只会在组件第一次初始化的时候计算一次  
+* 如果 array 不为空数组，则只有当依赖项的值变化时，才会重新计算  
