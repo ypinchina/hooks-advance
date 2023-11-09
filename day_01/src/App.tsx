@@ -1,12 +1,12 @@
 import React from "react";
-import { LevelA } from "./components/use_context/base";
-import { AppContextWrapper } from "./components/use_context/AppContext";
+import { AppContextReducerWrapper } from './components/use_reducer/AppContextReducer'
+import { Father } from "./components/use_reducer/context_reducer";
 const App: React.FC = () => {
   return (
     <>
-      <AppContextWrapper>
-        <LevelA></LevelA>
-      </AppContextWrapper>
+      <AppContextReducerWrapper>
+        <Father></Father>
+      </AppContextReducerWrapper>
     </>
   );
 };
