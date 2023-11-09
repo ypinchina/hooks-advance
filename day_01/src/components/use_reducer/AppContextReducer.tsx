@@ -4,7 +4,7 @@ type UserType = {
   name: string;
   age: number;
 }; 
-type UserContextType = { user: UserType; dispatch: React.Dispatch }
+type UserContextType = { user: UserType; dispatch: React.Dispatch<actionType> }
 
 type actionType =
   | { type: "name"; payload: string }
