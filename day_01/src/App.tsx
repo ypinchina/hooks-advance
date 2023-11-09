@@ -1,9 +1,9 @@
 import React from "react";
-import { Search } from "./components/use_callback/base";
+import { SearchBox } from "./components/use_callback/project_test";
 const App: React.FC = () => {
   return (
     <>
-      <Search></Search>
+      <SearchBox></SearchBox>
     </>
   );
 };
