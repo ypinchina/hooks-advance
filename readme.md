@@ -318,3 +318,41 @@ import { useImmerReducer } from 'use-immer'
 
 
 #### 使用useContext重构之前useReducer的代码
+
+
+# 性能优化相关hooks
+
+
+
+### React.memo
+
+当父组件被重新渲染的时候，也会触发子组件的重新渲染，这样就多出了无意义的性能开销。如果子组件的状态没有发生变化，则子组件是不需要被重新渲染的。
+
+在 React Hooks 中，我们可以使用 React.memo 来解决上述的问题，从而达到提高性能的目的。
+
+React.memo 的语法格式如下：  
+
+```
+const 组件 = React.memo(函数式组件)
+```
+
+
+* tips: 以后发现某个组件依赖于Props，（可能会因为pros重新渲染）建议使用React.memo包裹起来，提高性能
+
+
+### useMemo
+
+* useMemo 的语法格式如下：  
+```
+const memorizedValue = useMemo(cb, array)
+
+const memoValue = useMemo(() => {
+  return 计算得到的值
+}, [value]) // 表示监听 value 的变化
+```
+1. cb：这是一个函数，用于处理计算的逻辑，必须使用 return 返回计算的结果
+2. array：这个数组中存储的是依赖项，只要依赖项发生变化，都会触发 cb 的重新执行。使用 array 需要注意以下几点:  
+
+* 不传数组，每次更新都会重新计算
+* 空数组，只会计算一次
+* 依赖对应的值，对应的值发生变化时会重新执行 cb

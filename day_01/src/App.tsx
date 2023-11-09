@@ -1,12 +1,9 @@
 import React from "react";
-import { AppContextReducerWrapper } from './components/use_reducer/AppContextReducer'
-import { Father } from "./components/use_reducer/context_reducer";
+import { Father } from "./components/use_memo/useMemo";
 const App: React.FC = () => {
   return (
     <>
-      <AppContextReducerWrapper>
-        <Father></Father>
-      </AppContextReducerWrapper>
+      <Father></Father>
     </>
   );
 };
