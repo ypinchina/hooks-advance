@@ -324,7 +324,7 @@ import { useImmerReducer } from 'use-immer'
 
 
 
-### React.memo
+### React.memo(缓存某个组件)
 
 当父组件被重新渲染的时候，也会触发子组件的重新渲染，这样就多出了无意义的性能开销。如果子组件的状态没有发生变化，则子组件是不需要被重新渲染的。
 
@@ -340,7 +340,7 @@ const 组件 = React.memo(函数式组件)
 * tips: 以后发现某个组件依赖于Props，（可能会因为pros重新渲染）建议使用React.memo包裹起来，提高性能
 
 
-### useMemo
+### useMemo(缓存变量值)
 
 * useMemo 的语法格式如下：  
 ```
@@ -358,7 +358,7 @@ const memoValue = useMemo(() => {
 * 依赖对应的值，对应的值发生变化时会重新执行 cb
 
 
-### useCallback
+### useCallback(缓存函数、方法)
 
 之前我们所学的 useMemo 能够达到缓存某个**变量值**的效果，而当前要学习的 useCallback 用来对组件内的**函数**进行缓存，它返回的是缓存的**函数**。它的语法格式如下：
 ```
