@@ -1,9 +1,9 @@
 import React from "react";
-import { TabsContainer } from "./components/use_transition/base";
+import { SearchBox } from "./components/use_deferred_value/base";
 const App: React.FC = () => {
   return (
     <>
-      <TabsContainer></TabsContainer>
+      <SearchBox></SearchBox>
     </>
   );
 };
