@@ -376,3 +376,58 @@ useCallback 会返回一个 memorized 回调函数供组件使用，从而防止
 ## useTransition  
 
 useTransition 可以将一个更新转为低优先级更新，使其可以被打断，不阻塞 UI 对用户操作的响应，能够提高用户的使用体验。它常用于优化视图切换时的用户体验。  
+
+### useTransition 语法格式  
+```  
+import { useTransition } from 'react';
+
+function TabContainer() {
+  const [isPending, startTransition] = useTransition();
+  // ……
+}
+```  
+1. 参数：  
+
+调用 useTransition 时不需要传递任何参数  
+
+2. 返回值（数组）：  
+
+* isPending 布尔值：是否存在待处理的 transition，如果值为 true，说明页面上存在待渲染的部分，可以给用户展示一个加载的提示
+* startTransition 函数：调用此函数，可以把状态的更新标记为低优先级的，不阻塞 UI 对用户操作的响应,
+
+
+
+### useTransition 使用的注意事项  
+
+1. 传递给 startTransition 的函数必须是同步的。React 会立即执行此函数，并将在其执行期间发生的所有状态更新标记为 transition。如果在其执行期间，尝试稍后执行状态更新（例如在一个定时器中执行状态更新），这些状态更新不会被标记为 transition。  (里面放异步代码，该段代码不会被标记为低优先级，这就无意义了)
+
+2. 标记为 transition 的状态更新将被其他状态更新打断。例如在 transition 中更新图表组件，并在图表组件仍在重新渲染时继续在输入框中输入，React 将首先处理输入框的更新，之后再重新启动对图表组件的渲染工作。  
+
+3. transition 更新不能用于控制文本输入。(会造成一些问题, 需要使用useDeferredValue这个hooks来解决)  
+
+
+## useDeferredValue  
+
+input输入组件不能使用 useTransition 进行性能优化，因为 useTransition 会把状态更新标记为低优先级，被标记为 transition 的状态更新将被其他状态更新打断。因此在高频率输入时，会导致中间的输入状态丢失的问题。  
+即输入'123'之后，最后打断显示在屏幕的效果只有3  
+
+
+### 语法格式  
+useDeferredValue 提供一个 state 的延迟版本，根据其返回的延迟的 state 能够推迟更新 UI 中的某一部分，从而达到性能优化的目的。语法格式如下：  
+```
+import { useState, useDeferredValue } from 'react';  
+
+function SearchPage() {
+  const [kw, setKw] = useState('');
+  // 根据 kw 得到延迟的 kw
+  const deferredKw = useDeferredValue(kw);
+  // ...
+}
+```
+useDeferredValue 的返回值为一个**延迟版**的状态：
+
+在组件首次渲染期间，返回值将与传入的值相同
+在组件更新期间，React 将首先使用旧值重新渲染 UI 结构，这能够跳过某些复杂组件的 rerender，从而提高渲染效率。随后，React 将使用新值更新 deferredValue，并在后台使用新值重新渲染是一个**低优先级**的更新。这也意味着，如果在后台使用新值更新时 value 再次改变，它将打断那次更新。  
+
+
+完结撒花，本课程结课于11月11日。  
